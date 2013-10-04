@@ -53,10 +53,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.SELECTBOX = new System.Windows.Forms.GroupBox();
+            this.DOWN_PROGRESS = new System.Windows.Forms.ProgressBar();
             this.START_DOWNLOAD = new System.Windows.Forms.Button();
             this.PRINT_SEED = new System.Windows.Forms.CheckedListBox();
             this.INPUTDOWNLOADPATH = new System.Windows.Forms.FolderBrowserDialog();
-            this.DOWN_PROGRESS = new System.Windows.Forms.ProgressBar();
             this.INFOMATIONBOX.SuspendLayout();
             this.INFO_DEV.SuspendLayout();
             this.SELECTBOX.SuspendLayout();
@@ -352,6 +352,13 @@
             this.SELECTBOX.TabStop = false;
             this.SELECTBOX.Text = "Select";
             // 
+            // DOWN_PROGRESS
+            // 
+            this.DOWN_PROGRESS.Location = new System.Drawing.Point(7, 411);
+            this.DOWN_PROGRESS.Name = "DOWN_PROGRESS";
+            this.DOWN_PROGRESS.Size = new System.Drawing.Size(262, 17);
+            this.DOWN_PROGRESS.TabIndex = 2;
+            // 
             // START_DOWNLOAD
             // 
             this.START_DOWNLOAD.Location = new System.Drawing.Point(6, 434);
@@ -374,13 +381,6 @@
             // 
             this.INPUTDOWNLOADPATH.HelpRequest += new System.EventHandler(this.INPUTDOWNLOADPATH_HelpRequest);
             // 
-            // DOWN_PROGRESS
-            // 
-            this.DOWN_PROGRESS.Location = new System.Drawing.Point(7, 411);
-            this.DOWN_PROGRESS.Name = "DOWN_PROGRESS";
-            this.DOWN_PROGRESS.Size = new System.Drawing.Size(262, 17);
-            this.DOWN_PROGRESS.TabIndex = 2;
-            // 
             // Form1
             // 
             this.AcceptButton = this.START_DOWNLOAD;
@@ -396,7 +396,7 @@
             this.MaximumSize = new System.Drawing.Size(625, 528);
             this.MinimumSize = new System.Drawing.Size(625, 528);
             this.Name = "Form1";
-            this.Text = "Animation Auto Downloader v1.00";
+            this.Text = "Animation Auto Downloader v1.01";
             this.INFOMATIONBOX.ResumeLayout(false);
             this.INFOMATIONBOX.PerformLayout();
             this.INFO_DEV.ResumeLayout(false);
