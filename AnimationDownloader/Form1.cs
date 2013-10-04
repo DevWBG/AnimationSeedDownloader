@@ -18,7 +18,9 @@ namespace AnimationDownloader
     {
         string url = "http://tokyotosho.info/rss.php?filter=";
         string strPath = null;
-        bool nInputOptionClear = false;
+        bool nInputOptionClear = false; // for Clear Print Text Box True false
+        int nCheckBox = 0; // for Check box lease one
+
         public static XmlTextReader Reader;
         public static XmlDocument Document;
         public static XmlNode Rss;
@@ -75,6 +77,7 @@ namespace AnimationDownloader
             }
             if (CH_ANIME.Checked == true){
                 PRINT_OPTION.AppendText("Select 01. Anime\n");
+                nCheckBox++;
                 if(url != "http://tokyotosho.info/rss.php?filter="){
                     url += ",1";
                 }
@@ -85,6 +88,7 @@ namespace AnimationDownloader
 
             if (CH_MUSIC.Checked == true){
                 PRINT_OPTION.AppendText("Select 02. Music\n");
+                nCheckBox++;
                 if (url != "http://tokyotosho.info/rss.php?filter=")
                 {
                     url += ",2";
@@ -97,6 +101,7 @@ namespace AnimationDownloader
 
             if (CH_MANGA.Checked == true){
                 PRINT_OPTION.AppendText("Select 03. Manga\n");
+                nCheckBox++;
                 if (url != "http://tokyotosho.info/rss.php?filter=")
                 {
                     url += ",3";
@@ -109,6 +114,7 @@ namespace AnimationDownloader
 
             if (CH_HENTAI.Checked == true){
                 PRINT_OPTION.AppendText("Select 04. Hentai\n");
+                nCheckBox++;
                 if (url != "http://tokyotosho.info/rss.php?filter=")
                 {
                     url += ",4";
@@ -121,6 +127,7 @@ namespace AnimationDownloader
 
             if (CH_OTHER.Checked == true){
                 PRINT_OPTION.AppendText("Select 05. Other\n");
+                nCheckBox++;
                 if (url != "http://tokyotosho.info/rss.php?filter=")
                 {
                     url += ",5";
@@ -133,6 +140,7 @@ namespace AnimationDownloader
 
             if (CH_RAWS.Checked == true){
                 PRINT_OPTION.AppendText("Select 06. Anime\n");
+                nCheckBox++;
                 if (url != "http://tokyotosho.info/rss.php?filter=")
                 {
                     url += ",7";
@@ -145,6 +153,7 @@ namespace AnimationDownloader
 
             if (CH_DRAMA.Checked == true){
                 PRINT_OPTION.AppendText("Select 07. Drama\n");
+                nCheckBox++;
                 if (url != "http://tokyotosho.info/rss.php?filter=")
                 {
                     url += ",8";
@@ -158,6 +167,7 @@ namespace AnimationDownloader
             
             if (CH_MVIDEO.Checked == true){
                 PRINT_OPTION.AppendText("Select 08. Anime\n");
+                nCheckBox++;
                 if (url != "http://tokyotosho.info/rss.php?filter=")
                 {
                     url += ",9";
@@ -171,6 +181,7 @@ namespace AnimationDownloader
             if (CH_NONENG.Checked == true)
             {
                 PRINT_OPTION.AppendText("Select 09. Anime\n");
+                nCheckBox++;
                 if (url != "http://tokyotosho.info/rss.php?filter=")
                 {
                     url += ",10";
@@ -183,6 +194,7 @@ namespace AnimationDownloader
 
             if (CH_BATCH.Checked == true){
                 PRINT_OPTION.AppendText("Select 10. Batch\n");
+                nCheckBox++;
                 if (url != "http://tokyotosho.info/rss.php?filter="){
                     url += ",11";
                 }
@@ -193,6 +205,7 @@ namespace AnimationDownloader
 
             if (CH_HANIME.Checked == true){
                 PRINT_OPTION.AppendText("Select 11. Hentai Anime\n");
+                nCheckBox++;
                 if (url != "http://tokyotosho.info/rss.php?filter=")
                 {
                     url += ",12";
@@ -206,6 +219,7 @@ namespace AnimationDownloader
             if (CH_HMANGA.Checked == true)
             {
                 PRINT_OPTION.AppendText("Select 12. Hentai Manga\n");
+                nCheckBox++;
                 if (url != "http://tokyotosho.info/rss.php?filter=")
                 {
                     url += ",13";
@@ -219,6 +233,7 @@ namespace AnimationDownloader
             if (CH_HGAMES.Checked == true)
             {
                 PRINT_OPTION.AppendText("Select 13. Hentai Games\n");
+                nCheckBox++;
                 if (url != "http://tokyotosho.info/rss.php?filter=")
                 {
                     url += ",14";
@@ -232,6 +247,7 @@ namespace AnimationDownloader
             if (CH_JAV.Checked == true)
             {
                 PRINT_OPTION.AppendText("Select 14. JAV\n");
+                nCheckBox++;
                 if (url != "http://tokyotosho.info/rss.php?filter=")
                 {
                     url += ",15";
@@ -242,7 +258,14 @@ namespace AnimationDownloader
                 }
             }
 
+            if(nCheckBox == 0){
+                PRINT_OPTION.AppendText("Please select at least one.\n");
+                nInputOptionClear = true;
+                return;
+            }
+
             nInputOptionClear = true;
+            nCheckBox = 0;
 
             try
             {
@@ -255,6 +278,7 @@ namespace AnimationDownloader
             catch
             {
                 Form1.error = true;
+                url = "http://tokyotosho.info/rss.php?filter=";
                 PRINT_OPTION.AppendText("An error occured while opening tokyotosho.info\n");
             }
         }

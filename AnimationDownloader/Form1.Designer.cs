@@ -373,12 +373,14 @@
             // 
             // Form1
             // 
+            this.AcceptButton = this.START_DOWNLOAD;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(609, 489);
             this.Controls.Add(this.SELECTBOX);
             this.Controls.Add(this.INFO_DEV);
             this.Controls.Add(this.INFOMATIONBOX);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(625, 528);
