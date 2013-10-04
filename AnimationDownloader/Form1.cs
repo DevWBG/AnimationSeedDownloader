@@ -303,20 +303,20 @@ namespace AnimationDownloader
                 MessageBox.Show("Please setting Path first.", "Caution", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
                 return;
             }
-            for (int nIndexChecked = 0; nIndexChecked < PRINT_SEED.CheckedIndices.Count; nIndexChecked++)
+            foreach (int nIndexChecked in PRINT_SEED.CheckedIndices)
             {
                 DOWN_PROGRESS.Maximum = PRINT_SEED.CheckedIndices.Count;
                 try
                 {
-                    new WebClient().DownloadFile(rss.Items[nIndexChecked].Link, strPath + "\\" + rss.Items[nIndexChecked].Title + ".torrent");
-                    DOWN_PROGRESS.Value = nIndexChecked + 1;
+                    new WebClient().DownloadFile(rss.Items[nIndexChecked].Link, strPath + "\\" +rss.Items[nIndexChecked].Title + ".torrent");
+                    DOWN_PROGRESS.Value = nIndexChecked;
                 }
                 catch
                 {
                     PRINT_OPTION.AppendText("Error. cannot Download Seed.\n");
-                    DOWN_PROGRESS.Value = nIndexChecked + 1;
+                    DOWN_PROGRESS.Value = nIndexChecked;
                 }
-
+                
             }
             MessageBox.Show("Download Completed!");
             DOWN_PROGRESS.Value = 0;
