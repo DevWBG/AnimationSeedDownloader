@@ -141,7 +141,7 @@ namespace AnimationDownloader
             }
 
             if (CH_RAWS.Checked == true){
-                PRINT_OPTION.AppendText("Select 06. Anime\n");
+                PRINT_OPTION.AppendText("Select 06. Raws\n");
                 nCheckBox++;
                 if (url != "http://tokyotosho.info/rss.php?filter=")
                 {
@@ -168,7 +168,7 @@ namespace AnimationDownloader
 
             
             if (CH_MVIDEO.Checked == true){
-                PRINT_OPTION.AppendText("Select 08. Anime\n");
+                PRINT_OPTION.AppendText("Select 08. Music Video\n");
                 nCheckBox++;
                 if (url != "http://tokyotosho.info/rss.php?filter=")
                 {
@@ -182,7 +182,7 @@ namespace AnimationDownloader
 
             if (CH_NONENG.Checked == true)
             {
-                PRINT_OPTION.AppendText("Select 09. Anime\n");
+                PRINT_OPTION.AppendText("Select 09. Non-English\n");
                 nCheckBox++;
                 if (url != "http://tokyotosho.info/rss.php?filter=")
                 {
