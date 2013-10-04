@@ -20,13 +20,8 @@ namespace AnimationDownloader
         string strPath = null;
         bool nInputOptionClear = false; // for Clear Print Text Box True false
         int nCheckBox = 0; // for Check box lease one
-
-        public static XmlTextReader Reader;
-        public static XmlDocument Document;
-        public static XmlNode Rss;
-        public static XmlNode Channel;
-        public static XmlNode Item;
-        public static bool error;
+        RssReader rss;
+        bool bCheckOpen = false;
 
         public Form1()
         {
@@ -57,6 +52,7 @@ namespace AnimationDownloader
         private void INPUT_PATH_Click(object sender, EventArgs e)
         {
             INPUTDOWNLOADPATH.ShowDialog();
+            strPath = INPUTDOWNLOADPATH.SelectedPath;
         }
 
         private void INFO_DEV_Enter(object sender, EventArgs e)
@@ -71,9 +67,15 @@ namespace AnimationDownloader
 
         private void INPUT_OPTION_Click(object sender, EventArgs e)
         { // Ahh... Fucking
-            if (nInputOptionClear == true){
+            if (nInputOptionClear)
+            {
                 PRINT_OPTION.Clear();
                 nInputOptionClear = false;
+            }
+            if (bCheckOpen)
+            {
+                PRINT_SEED.Items.Clear();
+                bCheckOpen = false;
             }
             if (CH_ANIME.Checked == true){
                 PRINT_OPTION.AppendText("Select 01. Anime\n");
@@ -269,15 +271,18 @@ namespace AnimationDownloader
 
             try
             {
-                Form1.Reader = new XmlTextReader(url);
-                Form1.Document = new XmlDocument();
-                Form1.Document.Load((XmlReader)Program.Reader);
+                rss = new RssReader();
+                rss.FeedUrl = url;
+                foreach (RssItem item in rss.Execute())
+                {
+                    PRINT_SEED.Items.Add(item.Title);
+                }
                 url = "http://tokyotosho.info/rss.php?filter=";
                 PRINT_OPTION.AppendText("Successfuly opening tokyotosho.info\n");
+                bCheckOpen = true;
             }
             catch
             {
-                Form1.error = true;
                 url = "http://tokyotosho.info/rss.php?filter=";
                 PRINT_OPTION.AppendText("An error occured while opening tokyotosho.info\n");
             }
@@ -285,7 +290,6 @@ namespace AnimationDownloader
 
         private void INPUTDOWNLOADPATH_HelpRequest(object sender, EventArgs e)
         {
-            strPath = INPUTDOWNLOADPATH.SelectedPath;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -293,5 +297,29 @@ namespace AnimationDownloader
             System.Diagnostics.Process.Start("http://popnmusic.tistory.com/");
         }
 
-    }
+        private void START_DOWNLOAD_Click(object sender, EventArgs e)
+        {
+            if (strPath == null){
+                MessageBox.Show("Please setting Path first.", "Caution", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+                return;
+            }
+            for (int nIndexChecked = 0; nIndexChecked < PRINT_SEED.CheckedIndices.Count; nIndexChecked++)
+            {
+                DOWN_PROGRESS.Maximum = PRINT_SEED.CheckedIndices.Count;
+                try
+                {
+                    new WebClient().DownloadFile(rss.Items[nIndexChecked].Link, strPath + "\\" + rss.Items[nIndexChecked].Title + ".torrent");
+                    DOWN_PROGRESS.Value = nIndexChecked + 1;
+                }
+                catch
+                {
+                    PRINT_OPTION.AppendText("Error. cannot Download Seed.\n");
+                    DOWN_PROGRESS.Value = nIndexChecked + 1;
+                }
+
+            }
+            MessageBox.Show("Download Completed!");
+            DOWN_PROGRESS.Value = 0;
+            }
+        }
 }

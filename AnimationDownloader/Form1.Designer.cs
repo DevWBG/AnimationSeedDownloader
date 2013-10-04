@@ -56,6 +56,7 @@
             this.START_DOWNLOAD = new System.Windows.Forms.Button();
             this.PRINT_SEED = new System.Windows.Forms.CheckedListBox();
             this.INPUTDOWNLOADPATH = new System.Windows.Forms.FolderBrowserDialog();
+            this.DOWN_PROGRESS = new System.Windows.Forms.ProgressBar();
             this.INFOMATIONBOX.SuspendLayout();
             this.INFO_DEV.SuspendLayout();
             this.SELECTBOX.SuspendLayout();
@@ -341,6 +342,7 @@
             // 
             // SELECTBOX
             // 
+            this.SELECTBOX.Controls.Add(this.DOWN_PROGRESS);
             this.SELECTBOX.Controls.Add(this.START_DOWNLOAD);
             this.SELECTBOX.Controls.Add(this.PRINT_SEED);
             this.SELECTBOX.Location = new System.Drawing.Point(323, 0);
@@ -358,18 +360,26 @@
             this.START_DOWNLOAD.TabIndex = 1;
             this.START_DOWNLOAD.Text = "Start Download";
             this.START_DOWNLOAD.UseVisualStyleBackColor = true;
+            this.START_DOWNLOAD.Click += new System.EventHandler(this.START_DOWNLOAD_Click);
             // 
             // PRINT_SEED
             // 
             this.PRINT_SEED.FormattingEnabled = true;
             this.PRINT_SEED.Location = new System.Drawing.Point(6, 17);
             this.PRINT_SEED.Name = "PRINT_SEED";
-            this.PRINT_SEED.Size = new System.Drawing.Size(263, 404);
+            this.PRINT_SEED.Size = new System.Drawing.Size(263, 388);
             this.PRINT_SEED.TabIndex = 0;
             // 
             // INPUTDOWNLOADPATH
             // 
             this.INPUTDOWNLOADPATH.HelpRequest += new System.EventHandler(this.INPUTDOWNLOADPATH_HelpRequest);
+            // 
+            // DOWN_PROGRESS
+            // 
+            this.DOWN_PROGRESS.Location = new System.Drawing.Point(7, 411);
+            this.DOWN_PROGRESS.Name = "DOWN_PROGRESS";
+            this.DOWN_PROGRESS.Size = new System.Drawing.Size(262, 17);
+            this.DOWN_PROGRESS.TabIndex = 2;
             // 
             // Form1
             // 
@@ -425,6 +435,7 @@
         private System.Windows.Forms.CheckedListBox PRINT_SEED;
         private System.Windows.Forms.TextBox PRINT_OPTION;
         private System.Windows.Forms.FolderBrowserDialog INPUTDOWNLOADPATH;
+        private System.Windows.Forms.ProgressBar DOWN_PROGRESS;
     }
 }
 
