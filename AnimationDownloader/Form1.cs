@@ -266,7 +266,8 @@ namespace AnimationDownloader
                 return;
             }
 
-            nInputOptionClear = true;
+            nInputOptionClear 
+                = true;
             nCheckBox = 0;
 
             try
