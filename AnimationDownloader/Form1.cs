@@ -284,7 +284,7 @@ namespace AnimationDownloader
             catch (Exception exc)
             {
                 url = "http://tokyotosho.info/rss.php?filter=";
-                PRINT_OPTION.AppendText("An error occured while opening tokyotosho.info\n");
+                PRINT_OPTION.AppendText(exc.ToString());
             }
         }
 
