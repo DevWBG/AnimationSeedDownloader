@@ -396,7 +396,7 @@
             this.MaximumSize = new System.Drawing.Size(625, 528);
             this.MinimumSize = new System.Drawing.Size(625, 528);
             this.Name = "Form1";
-            this.Text = "Animation Auto Downloader v1.01";
+            this.Text = "Animation Auto Downloader v1.02";
             this.INFOMATIONBOX.ResumeLayout(false);
             this.INFOMATIONBOX.PerformLayout();
             this.INFO_DEV.ResumeLayout(false);

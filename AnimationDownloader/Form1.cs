@@ -281,7 +281,7 @@ namespace AnimationDownloader
                 PRINT_OPTION.AppendText("Successfuly opening tokyotosho.info\n");
                 bCheckOpen = true;
             }
-            catch
+            catch (Exception exc)
             {
                 url = "http://tokyotosho.info/rss.php?filter=";
                 PRINT_OPTION.AppendText("An error occured while opening tokyotosho.info\n");
@@ -311,15 +311,15 @@ namespace AnimationDownloader
                     new WebClient().DownloadFile(rss.Items[nIndexChecked].Link, strPath + "\\" +rss.Items[nIndexChecked].Title + ".torrent");
                     DOWN_PROGRESS.Value = nIndexChecked;
                 }
-                catch
+                catch (Exception exc)
                 {
-                    PRINT_OPTION.AppendText("Error. cannot Download Seed.\n");
+                    PRINT_OPTION.AppendText(exc.ToString());
                     DOWN_PROGRESS.Value = nIndexChecked;
                 }
                 
             }
             MessageBox.Show("Download Completed!");
             DOWN_PROGRESS.Value = 0;
-            }
+        }
         }
 }
