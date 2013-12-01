@@ -16,12 +16,10 @@ namespace AnimationDownloader
 {
     public partial class Form1 : Form
     {
-        string url = "http://tokyotosho.info/rss.php?filter=";
+        
         string strPath = null;
-        bool nInputOptionClear = false; // for Clear Print Text Box True false
-        int nCheckBox = 0; // for Check box lease one
         RssReader rss;
-        bool bCheckOpen = false;
+        
 
         public Form1()
         {
@@ -67,225 +65,72 @@ namespace AnimationDownloader
 
         private void INPUT_OPTION_Click(object sender, EventArgs e)
         { // Ahh... Fucking
-            if (nInputOptionClear)
+
+            int nTemp = 0;
+            PRINT_OPTION.Clear();
+            bool CheckSelect = false;
+            string TempURL = "http://tokyotosho.info/rss.php?filter=";
+
+            CheckboxSelect Chbox = new CheckboxSelect(TempURL, 14);
+
+            Chbox.InputCheckbox(nTemp++, CH_ANIME, "Anime");
+            Chbox.InputCheckbox(nTemp++, CH_MUSIC, "Music");
+            Chbox.InputCheckbox(nTemp++, CH_MANGA, "Manga");
+            Chbox.InputCheckbox(nTemp++, CH_HENTAI, "Hentai");
+            Chbox.InputCheckbox(nTemp++, CH_OTHER, "Other");
+            Chbox.InputCheckbox(nTemp++, CH_RAWS, "Raws");
+            Chbox.InputCheckbox(nTemp++, CH_DRAMA, "Drama");
+            Chbox.InputCheckbox(nTemp++, CH_MVIDEO, "Music Video");
+            Chbox.InputCheckbox(nTemp++, CH_NONENG, "Non-English");
+            Chbox.InputCheckbox(nTemp++, CH_BATCH, "Batch");
+            Chbox.InputCheckbox(nTemp++, CH_HANIME, "Hentai Anime");
+            Chbox.InputCheckbox(nTemp++, CH_HMANGA, "Hentai Manga");
+            Chbox.InputCheckbox(nTemp++, CH_HGAMES, "Hentai Games");
+            Chbox.InputCheckbox(nTemp++, CH_JAV, "JAV");
+
+            nTemp = 0;
+            for (int i = 0; i < 14; i++)
             {
-                PRINT_OPTION.Clear();
-                nInputOptionClear = false;
+                if(++nTemp == 6)
+                {
+                    nTemp = 7;
+                }
+                
+                if(Chbox.returnChbox(i).Checked == true)
+                {
+                    CheckSelect = true;
+                    if(Chbox.returnURL() != TempURL)
+                    {
+                        Chbox.AddURL(","+nTemp);
+                    }
+                    else
+                    {
+                        Chbox.AddURL(nTemp.ToString());
+                    }
+                    PRINT_OPTION.AppendText("Select " + (i+1) + ". " + Chbox.returnName(i) + "\n");
+                }
             }
-            if (bCheckOpen)
+
+            if(!CheckSelect)
             {
-                PRINT_SEED.Items.Clear();
-                bCheckOpen = false;
-            }
-            if (CH_ANIME.Checked == true){
-                PRINT_OPTION.AppendText("Select 01. Anime\n");
-                nCheckBox++;
-                if(url != "http://tokyotosho.info/rss.php?filter="){
-                    url += ",1";
-                }
-                else{
-                    url += "1";
-                }
-            }
-
-            if (CH_MUSIC.Checked == true){
-                PRINT_OPTION.AppendText("Select 02. Music\n");
-                nCheckBox++;
-                if (url != "http://tokyotosho.info/rss.php?filter=")
-                {
-                    url += ",2";
-                }
-                else
-                {
-                    url += "2";
-                }
-            }
-
-            if (CH_MANGA.Checked == true){
-                PRINT_OPTION.AppendText("Select 03. Manga\n");
-                nCheckBox++;
-                if (url != "http://tokyotosho.info/rss.php?filter=")
-                {
-                    url += ",3";
-                }
-                else
-                {
-                    url += "3";
-                }
-            }
-
-            if (CH_HENTAI.Checked == true){
-                PRINT_OPTION.AppendText("Select 04. Hentai\n");
-                nCheckBox++;
-                if (url != "http://tokyotosho.info/rss.php?filter=")
-                {
-                    url += ",4";
-                }
-                else
-                {
-                    url += "4";
-                }
-            }
-
-            if (CH_OTHER.Checked == true){
-                PRINT_OPTION.AppendText("Select 05. Other\n");
-                nCheckBox++;
-                if (url != "http://tokyotosho.info/rss.php?filter=")
-                {
-                    url += ",5";
-                }
-                else
-                {
-                    url += "5";
-                }
-            }
-
-            if (CH_RAWS.Checked == true){
-                PRINT_OPTION.AppendText("Select 06. Raws\n");
-                nCheckBox++;
-                if (url != "http://tokyotosho.info/rss.php?filter=")
-                {
-                    url += ",7";
-                }
-                else
-                {
-                    url += "7";
-                }
-            }
-
-            if (CH_DRAMA.Checked == true){
-                PRINT_OPTION.AppendText("Select 07. Drama\n");
-                nCheckBox++;
-                if (url != "http://tokyotosho.info/rss.php?filter=")
-                {
-                    url += ",8";
-                }
-                else
-                {
-                    url += "8";
-                }
-            }
-
-            
-            if (CH_MVIDEO.Checked == true){
-                PRINT_OPTION.AppendText("Select 08. Music Video\n");
-                nCheckBox++;
-                if (url != "http://tokyotosho.info/rss.php?filter=")
-                {
-                    url += ",9";
-                }
-                else
-                {
-                    url += "9";
-                }
-            }
-
-            if (CH_NONENG.Checked == true)
-            {
-                PRINT_OPTION.AppendText("Select 09. Non-English\n");
-                nCheckBox++;
-                if (url != "http://tokyotosho.info/rss.php?filter=")
-                {
-                    url += ",10";
-                }
-                else
-                {
-                    url += "10";
-                }
-            }
-
-            if (CH_BATCH.Checked == true){
-                PRINT_OPTION.AppendText("Select 10. Batch\n");
-                nCheckBox++;
-                if (url != "http://tokyotosho.info/rss.php?filter="){
-                    url += ",11";
-                }
-                else{
-                    url += "11";
-                }
-            }
-
-            if (CH_HANIME.Checked == true){
-                PRINT_OPTION.AppendText("Select 11. Hentai Anime\n");
-                nCheckBox++;
-                if (url != "http://tokyotosho.info/rss.php?filter=")
-                {
-                    url += ",12";
-                }
-                else
-                {
-                    url += "12";
-                }
-            }
-
-            if (CH_HMANGA.Checked == true)
-            {
-                PRINT_OPTION.AppendText("Select 12. Hentai Manga\n");
-                nCheckBox++;
-                if (url != "http://tokyotosho.info/rss.php?filter=")
-                {
-                    url += ",13";
-                }
-                else
-                {
-                    url += "13";
-                }
-            }
-            
-            if (CH_HGAMES.Checked == true)
-            {
-                PRINT_OPTION.AppendText("Select 13. Hentai Games\n");
-                nCheckBox++;
-                if (url != "http://tokyotosho.info/rss.php?filter=")
-                {
-                    url += ",14";
-                }
-                else
-                {
-                    url += "14";
-                }
-            }
-
-            if (CH_JAV.Checked == true)
-            {
-                PRINT_OPTION.AppendText("Select 14. JAV\n");
-                nCheckBox++;
-                if (url != "http://tokyotosho.info/rss.php?filter=")
-                {
-                    url += ",15";
-                }
-                else
-                {
-                    url += "15";
-                }
-            }
-
-            if(nCheckBox == 0){
                 PRINT_OPTION.AppendText("Please select at least one.\n");
-                nInputOptionClear = true;
                 return;
             }
-
-            nInputOptionClear 
-                = true;
-            nCheckBox = 0;
 
             try
             {
                 rss = new RssReader();
-                rss.FeedUrl = url;
+                rss.FeedUrl = Chbox.returnURL();
                 foreach (RssItem item in rss.Execute())
                 {
                     PRINT_SEED.Items.Add(item.Title);
                 }
-                url = "http://tokyotosho.info/rss.php?filter=";
                 PRINT_OPTION.AppendText("Successfuly opening tokyotosho.info\n");
-                bCheckOpen = true;
             }
             catch (Exception exc)
             {
-                url = "http://tokyotosho.info/rss.php?filter=";
-                PRINT_OPTION.AppendText(exc.ToString());
+                exc.ToString();
+                PRINT_OPTION.AppendText("Error opening tokyotosho.info\n");
             }
         }
 
@@ -302,7 +147,8 @@ namespace AnimationDownloader
         private void START_DOWNLOAD_Click(object sender, EventArgs e)
         {
             if (strPath == null){
-                MessageBox.Show("Please setting Path first.", "Caution", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+                MessageBox.Show("Please setting Path first.", "Caution",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
                 return;
             }
             foreach (int nIndexChecked in PRINT_SEED.CheckedIndices)
@@ -310,7 +156,8 @@ namespace AnimationDownloader
                 DOWN_PROGRESS.Maximum = PRINT_SEED.CheckedIndices.Count;
                 try
                 {
-                    new WebClient().DownloadFile(rss.Items[nIndexChecked].Link, strPath + "\\" +rss.Items[nIndexChecked].Title + ".torrent");
+                    new WebClient().DownloadFile(rss.Items[nIndexChecked].Link,
+                        strPath + "\\" +rss.Items[nIndexChecked].Title + ".torrent");
                     DOWN_PROGRESS.Value = nIndexChecked;
                 }
                 catch (Exception exc)
@@ -324,4 +171,41 @@ namespace AnimationDownloader
             DOWN_PROGRESS.Value = 0;
         }
         }
+    class CheckboxSelect
+    {
+        string url;
+        CheckBox[] Chbox;
+        string[] name;
+
+        public CheckboxSelect(string tempURL, int nTemp)
+        {
+            url = tempURL;
+            Chbox = new CheckBox[nTemp];
+            name = new string[nTemp];
+        }
+
+        public void InputCheckbox(int nTemp, CheckBox Tempbox, string TempName)
+        {
+            Chbox[nTemp] = Tempbox;
+            name[nTemp] = TempName;
+        }
+
+        public string returnURL()
+        {
+            return url;
+        }
+        public CheckBox returnChbox(int nTemp)
+        {
+            return Chbox[nTemp];
+        }
+        public string returnName(int nTemp)
+        {
+            return name[nTemp];
+        }
+        public void AddURL(string addurl)
+        {
+            url += addurl;
+        }
+    }
+
 }
