@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace AnimationDownloader
 {
@@ -19,7 +20,8 @@ namespace AnimationDownloader
         
         string strPath = null;
         RssReader rss;
-        
+        [DllImport("winmm.dll")]
+        private static extern long mciSendString(string strCommand, StringBuilder strReturn, int iReturnLength, IntPtr hwndCallback);
 
         public Form1()
         {
@@ -121,11 +123,12 @@ namespace AnimationDownloader
             {
                 rss = new RssReader();
                 rss.FeedUrl = Chbox.returnURL();
+                PRINT_OPTION.AppendText("Successfuly opening tokyotosho.info\n");
+                PRINT_SEED.Items.Clear();
                 foreach (RssItem item in rss.Execute())
                 {
                     PRINT_SEED.Items.Add(item.Title);
                 }
-                PRINT_OPTION.AppendText("Successfuly opening tokyotosho.info\n");
             }
             catch (Exception exc)
             {
